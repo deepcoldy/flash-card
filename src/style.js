@@ -6,6 +6,8 @@ export default StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     height: 100,
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
   },
   title: {
     fontSize: 18,

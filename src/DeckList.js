@@ -1,15 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
-// import { StackNavigator } from 'react-navigation';
+import { StyleSheet, Text, View, FlatList, Button, Alert } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { SafeAreaView } from 'react-navigation';
 import styles from "./style";
 
-import { SafeAreaView } from 'react-navigation';
 function Card({ data }) {
-  console.log(data)
+  // console.log(data)
   return (
     <View style={styles.card}>
-      <Text style={styles.title}>
+      <Text style={styles.title}  onPress={() => {
+      Alert.alert('You tapped the button!');
+      // this.props.navigation.navigate('IndividualDeck')
+    }}>
         {data.title}
       </Text>
       <Text style={styles.number}>
@@ -19,6 +21,19 @@ function Card({ data }) {
   )
 }
 
+const deckData = [{
+  key: 1,
+  title: '1',
+  count: '2'
+},{
+  key: 2,
+  title: '2',
+  count: '3'
+},{
+  key: 3,
+  title: '3',
+  count: '5'
+}]
 class DeckList extends React.Component {
   constructor(props) {
     super(props);
@@ -26,13 +41,9 @@ class DeckList extends React.Component {
 
   render() {
     return (
-      <SafeAreaView>
+      <SafeAreaView style={{ minHeight: '100%' }}>
         <FlatList
-          data={[{
-            key: 'a',
-            title: 'text',
-            count: '5'
-          }]}
+          data={deckData}
           renderItem={(item) => {
             console.log(item)
             return (
@@ -40,10 +51,6 @@ class DeckList extends React.Component {
             )
           }}
         ></FlatList>
-        
-        <Text>
-          1 Screen
-        </Text>
         {/* <Button
           title="Next screen"
           onPress={() => this.props.navigation.navigate('Screen2')}
