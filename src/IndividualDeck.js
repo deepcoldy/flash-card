@@ -7,16 +7,15 @@ import styles from "./style";
 import { SafeAreaView } from 'react-navigation';
 
 class IndividualDeck extends React.Component {
+  constructor(props) {
+    super()
+    const { params } = props.navigation.state;
+    console.log(params)
+  }
   render() {
     return (
       <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
-        <StatusBar
-          barStyle="dark-content"
-          backgroundColor="red"
-        />
-        <Text style={styles.paragraph}>
-          Dark Screen
-        </Text>
+        <Text></Text>
         <Button
           title="Next screen"
           onPress={() => this.props.navigation.navigate('DeckList')}
