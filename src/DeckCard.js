@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import styles from "./style";
 
@@ -10,19 +10,20 @@ class Card extends React.Component {
   
   render(props) {
     return(
-      <View style = { styles.card } >
-        <Text style={styles.title} onPress={() => {
-          Alert.alert('You tapped the button!');
-          this.props.navigation.navigate('IndividualDeck', {
-            deckId: this.props.data.id
-          })
-        }}>
-          {this.props.data.title}
-        </Text>
-        <Text style={styles.number}>
-          {this.props.data.count} cards
-        </Text>
-      </View>
+      <TouchableOpacity onPress={() => {
+        this.props.navigation.navigate('IndividualDeck', {
+          deck: this.props.data
+        })
+      }}>
+        <View style={styles.card}>
+          <Text style={styles.title}>
+            {this.props.data.title}
+          </Text>
+          <Text style={styles.number}>
+            {this.props.data.count} cards
+          </Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 }

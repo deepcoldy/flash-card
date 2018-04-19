@@ -16,19 +16,23 @@ class DeckList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      deckData: [],
+      decksData: [],
     }
-    api.getDecks().then((deckData) => {
+    setTimeout(async () => {
+      const decksData = await api.getDecks()
       this.setState({
-        deckData,
+        decksData,
       })
-    })
+    }, 0);
   }
+  static navigationOptions = ({ navigation }) => ({
+    title: `Decks`,
+  });
   render() {
     return (
       <SafeAreaView style={{ minHeight: '100%' }}>
         <FlatList
-          data={this.state.deckData}
+          data={this.state.decksData}
           keyExtractor={_keyExtractor}
           renderItem={(item) => {
             return (
@@ -44,16 +48,16 @@ class DeckList extends React.Component {
               if(value) {
                 console.log(value)
                 await this.setState({
-                  deckData: [
-                    ...this.state.deckData,
+                  decksData: [
+                    ...this.state.decksData,
                     {
-                      id: this.state.deckData.length + 1,
+                      id: this.state.decksData.length + 1,
                       title: value,
                       count: 0
                     }
                   ]
                 });
-                AsyncStorage.setItem('deckData', JSON.stringify(this.state.deckData))
+                AsyncStorage.setItem('decksData', JSON.stringify(this.state.decksData))
               }
             }
           },
@@ -64,7 +68,7 @@ class DeckList extends React.Component {
             { text: 'Cancel', onPress: () => console.log('cancel') },
             { text: 'Ok', onPress: () => {
               this.setState({
-                deckData: []
+                decksData: []
               })
               AsyncStorage.clear()
             } },

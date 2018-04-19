@@ -17,6 +17,4 @@ export default StackNavigator({
   IndividualDeck: {
     screen: IndividualDeck,
   },
-}, {
-  headerMode: 'none',
 });
