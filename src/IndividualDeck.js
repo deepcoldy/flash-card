@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, StatusBar, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, Image, StatusBar, AsyncStorage } from 'react-native';
 // import { StackNavigator } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
 import styles from "./style";
 import api from "./utils";
+import { Button } from 'antd-mobile';
 
 import { SafeAreaView } from 'react-navigation';
 
@@ -16,18 +17,18 @@ class IndividualDeck extends React.Component {
   static navigationOptions = ({ navigation }) => {
     console.log(navigation)
     return {
-      title: navigation.state.params.deck.title.toString()
+      title: navigation.state.params.deck.title
     }
   }
   
   render() {
     return (
-      <SafeAreaView style={[styles.container, { backgroundColor: '#ecf0f1' }]}>
-        <Text>123</Text>
-        <Button
-          title="Next screen"
-          onPress={() => this.props.navigation.navigate('DeckList')}
-        />
+      <SafeAreaView style={[styles.individualDeck]}>
+        <Text style={styles.deckName}>{this.props.navigation.state.params.deck.title}</Text>
+        <Text style={styles.questionNumber}>{this.props.navigation.state.params.deck.count} cards</Text>
+        <Button type="ghost" style={styles.button}>Add Card</Button>
+        <Button type="primary" style={styles.button}>Start Quiz</Button>
+
       </SafeAreaView>
     );
   }

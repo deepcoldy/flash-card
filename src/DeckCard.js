@@ -8,7 +8,7 @@ class Card extends React.Component {
     super(props);
   }
   
-  render(props) {
+  render() {
     return(
       <TouchableOpacity onPress={() => {
         this.props.navigation.navigate('IndividualDeck', {
