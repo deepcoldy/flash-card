@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, Button, Image, StatusBar } from 'react-native';
 // import { StackNavigator } from 'react-navigation';
 import DeckList from "./src/DeckList";
 import IndividualDeck from "./src/IndividualDeck";
+import AddQuestion from "./src/AddQuestion";
 import styles from "./src/style";
 
 import { StackNavigator } from 'react-navigation';
@@ -16,5 +17,8 @@ export default StackNavigator({
   },
   IndividualDeck: {
     screen: IndividualDeck,
+  },
+  AddQuestion: {
+    screen: AddQuestion,
   },
 });

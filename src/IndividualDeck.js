@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, StatusBar, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, View, Image, StatusBar, AsyncStorage, TouchableOpacity } from 'react-native';
 // import { StackNavigator } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
 import styles from "./style";
@@ -15,7 +15,7 @@ class IndividualDeck extends React.Component {
     // const { params } = props.navigation.state;
   }
   static navigationOptions = ({ navigation }) => {
-    console.log(navigation)
+    // console.log(navigation)
     return {
       title: navigation.state.params.deck.title
     }
@@ -26,7 +26,11 @@ class IndividualDeck extends React.Component {
       <SafeAreaView style={[styles.individualDeck]}>
         <Text style={styles.deckName}>{this.props.navigation.state.params.deck.title}</Text>
         <Text style={styles.questionNumber}>{this.props.navigation.state.params.deck.count} cards</Text>
-        <Button type="ghost" style={styles.button}>Add Card</Button>
+        <Button type="ghost" style={styles.button} onClick={() => {
+          this.props.navigation.navigate('AddQuestion', {
+            deck: this.props.navigation.state.params.deck
+          })
+        }}>Add Card</Button>
         <Button type="primary" style={styles.button}>Start Quiz</Button>
 
       </SafeAreaView>
