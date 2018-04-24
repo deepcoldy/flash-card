@@ -20,7 +20,7 @@ class Card extends React.Component {
             {this.props.data.title}
           </Text>
           <Text style={styles.number}>
-            {this.props.data.count} cards
+            {this.props.data.questions.length} cards
           </Text>
         </View>
       </TouchableOpacity>

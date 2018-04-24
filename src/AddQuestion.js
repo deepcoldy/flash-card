@@ -10,6 +10,10 @@ import { SafeAreaView } from 'react-navigation';
 class AddQuestion extends React.Component {
   constructor(props) {
     super()
+    this.state = {
+      question: '',
+      answer: ''
+    }
     // const { params } = props.navigation.state;
   }
   static navigationOptions = ({ navigation }) => {
@@ -17,8 +21,22 @@ class AddQuestion extends React.Component {
       title: navigation.state.params.deck.title
     }
   }
-  
+  question = (value) => {
+    if(value) {
+      this.setState({
+        question: value
+      })
+    }
+  }
+  answer = (value) => {
+    if (value) {
+      this.setState({
+        answer: value
+      })
+    }
+  }
   render() {
+    const deck = this.props.navigation.state.params.deck;
     return (
       <SafeAreaView>
         <List>
@@ -27,17 +45,29 @@ class AddQuestion extends React.Component {
             clear
             moneyKeyboardAlign="left"
             labelNumber="4.5"
+            onChange={this.question}
+            value={this.state.question}
           >Question:</InputItem>
           <InputItem
             placeholder="Please input a answer"
             clear
             moneyKeyboardAlign="left"
             labelNumber="4.5"
+            onChange={this.answer}
+            value={this.state.answer}
           >Answer:</InputItem>
         </List>
         <List.Item>
           <Button
-            onClick={() => this.customFocusInst.focus()}
+            onClick={() => {
+              api.saveQuestion({
+                id: deck.id,
+                question: this.state.question,
+                answer: this.state.answer
+              }).then(() => {
+                
+              })
+            }}
           >
             Submit
           </Button>

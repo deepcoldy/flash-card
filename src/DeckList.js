@@ -23,6 +23,7 @@ class DeckList extends React.Component {
       this.setState({
         decksData,
       })
+      console.log(decksData)
     }, 0);
   }
   static navigationOptions = ({ navigation }) => ({
@@ -53,7 +54,7 @@ class DeckList extends React.Component {
                     {
                       id: this.state.decksData.length + 1,
                       title: value,
-                      count: 0
+                      questions: []
                     }
                   ]
                 });
