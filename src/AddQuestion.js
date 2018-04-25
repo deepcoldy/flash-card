@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, StatusBar, AsyncStorage, TextInput } from 'react-native';
+import { StyleSheet, Text, StatusBar, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
 // import { StackNavigator } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
 import styles from "./style";
@@ -18,7 +18,14 @@ class AddQuestion extends React.Component {
   }
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.state.params.deck.title
+      title: navigation.state.params.deck.title,
+      headerLeft: (
+        <TouchableOpacity onPress={() => {
+          navigation.goBack('IndividualDeck', {
+            deck: navigation.state.params.deck
+          })
+        }}><Text>back</Text></TouchableOpacity>
+      )
     }
   }
   question = (value) => {

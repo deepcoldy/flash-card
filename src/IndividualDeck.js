@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, StatusBar, AsyncStorage, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, StatusBar, AsyncStorage, TouchableOpacity, BackHandler } from 'react-native';
 // import { StackNavigator } from 'react-navigation';
 import { withNavigation } from 'react-navigation';
 import styles from "./style";
@@ -17,10 +17,20 @@ class IndividualDeck extends React.Component {
   static navigationOptions = ({ navigation }) => {
     // console.log(navigation)
     return {
-      title: navigation.state.params.deck.title
+      title: navigation.state.params.deck.title,
     }
   }
-  
+  // componentWillMount() {
+  //   BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
+  // }
+  // componentWillUnmount() {
+  //   BackHandler.removeEventListener('hardwareBackPress', this.onBackButtonPressAndroid);
+  // }
+
+  // onBackButtonPressAndroid = () => {
+  //   console.log(123)
+  // }
+
   render() {
     return (
       <SafeAreaView style={[styles.individualDeck]}>

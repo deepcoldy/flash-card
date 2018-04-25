@@ -11,7 +11,7 @@ const prompt = Modal.prompt;
 const alert = Modal.alert;
 // AsyncStorage.clear()
 
-_keyExtractor = (item, index) => item.id;
+_keyExtractor = (item, index) => item.id.toString();
 class DeckList extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +23,6 @@ class DeckList extends React.Component {
       this.setState({
         decksData,
       })
-      console.log(decksData)
     }, 0);
   }
   static navigationOptions = ({ navigation }) => ({
