@@ -4,8 +4,9 @@ import { StyleSheet, Text, StatusBar, AsyncStorage, TextInput, TouchableOpacity 
 import { withNavigation } from 'react-navigation';
 import styles from "./style";
 import api from "./utils";
-import { Button, List, InputItem } from 'antd-mobile';
+import { Button, List, InputItem, Toast } from 'antd-mobile';
 import { SafeAreaView } from 'react-navigation';
+import { Consumer } from "./context/decks";
 
 class AddQuestion extends React.Component {
   constructor(props) {
@@ -19,13 +20,6 @@ class AddQuestion extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.state.params.deck.title,
-      headerLeft: (
-        <TouchableOpacity onPress={() => {
-          navigation.goBack('IndividualDeck', {
-            deck: navigation.state.params.deck
-          })
-        }}><Text>back</Text></TouchableOpacity>
-      )
     }
   }
   question = (value) => {
@@ -45,41 +39,48 @@ class AddQuestion extends React.Component {
   render() {
     const deck = this.props.navigation.state.params.deck;
     return (
-      <SafeAreaView>
-        <List>
-          <InputItem
-            placeholder="Please input a question"
-            clear
-            moneyKeyboardAlign="left"
-            labelNumber="4.5"
-            onChange={this.question}
-            value={this.state.question}
-          >Question:</InputItem>
-          <InputItem
-            placeholder="Please input a answer"
-            clear
-            moneyKeyboardAlign="left"
-            labelNumber="4.5"
-            onChange={this.answer}
-            value={this.state.answer}
-          >Answer:</InputItem>
-        </List>
-        <List.Item>
-          <Button
-            onClick={() => {
-              api.saveQuestion({
-                id: deck.id,
-                question: this.state.question,
-                answer: this.state.answer
-              }).then(() => {
-                
-              })
-            }}
-          >
-            Submit
-          </Button>
-        </List.Item>
-      </SafeAreaView>
+      <Consumer>
+        {
+          store =>  <SafeAreaView>
+            <List>
+              <InputItem
+                placeholder="Please input a question"
+                clear
+                moneyKeyboardAlign="left"
+                labelNumber="4.5"
+                onChange={this.question}
+                value={this.state.question}
+              >Question:</InputItem>
+              <InputItem
+                placeholder="Please input a answer"
+                clear
+                moneyKeyboardAlign="left"
+                labelNumber="4.5"
+                onChange={this.answer}
+                value={this.state.answer}
+              >Answer:</InputItem>
+            </List>
+            <List.Item>
+              <Button
+                onClick={() => {
+                  store.addQuestion({
+                    id: deck.id,
+                    question: this.state.question,
+                    answer: this.state.answer
+                  })
+                  this.setState({
+                    question: '',
+                    answer: '',
+                  })
+                  Toast.success('Add Question Success!', 1);
+                }}
+              >
+                Submit
+              </Button>
+            </List.Item>
+          </SafeAreaView>
+        }
+      </Consumer>
     );
   }
 }
