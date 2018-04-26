@@ -1,13 +1,14 @@
 import React from "react";
 import { withNavigation, SafeAreaView, NavigationActions } from "react-navigation";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import { Consumer } from "./context/decks";
-import { Button } from "antd-mobile";
+import { Button, WhiteSpace } from "antd-mobile";
+import styles from "./style";
 
 function Page(props) {
   console.log(props)
   return (
-    <Text>{`${props.current}/${props.total}`}</Text>
+    <Text style={styles.page}>{`${props.current}/${props.total}`}</Text>
   )
 }
 
@@ -36,9 +37,14 @@ class Quiz extends React.Component{
   }
 
   render() {
+    const { deck, current } = this.state
     return (
-      <SafeAreaView>
-        <Page current={this.state.current} total={this.state.deck.questions.length}/>
+      <SafeAreaView style={styles.wrapper}>
+        <Page current={current} total={deck.questions.length}/>
+        <Text style={styles.title}>{deck.questions[current].question}</Text>
+        <WhiteSpace size="xl"/>
+        <Button type="primary" style={styles.button}>Correct</Button>
+        <Button type="warning" style={styles.button}>Incorrect</Button>
       </SafeAreaView>
     )
   }

@@ -26,7 +26,7 @@ class IndividualDeck extends React.Component {
       <Consumer>
         {
           store => 
-          <SafeAreaView style={[styles.individualDeck]}>
+          <SafeAreaView style={[styles.wrapper]}>
             <Text style={styles.deckName}>{this.props.navigation.state.params.deck.title}</Text>
             <Text style={styles.questionNumber}>{this.props.navigation.state.params.deck.questions.length} cards</Text>
             <Button type="ghost" style={styles.button} onClick={() => {

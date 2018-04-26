@@ -20,7 +20,8 @@ export default StyleSheet.create({
     marginBottom: 10,
     width: 200,
   },
-  individualDeck: {
+  wrapper: {
+    position: 'relative',
     display: 'flex',
     justifyContent: 'center',
     flex: 1,
@@ -34,5 +35,10 @@ export default StyleSheet.create({
     fontSize: 18,
     color: 'grey',
     marginBottom: 200,
+  },
+  page: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
   }
 });
