@@ -4,8 +4,10 @@ import { StyleSheet, Text, View, Image, StatusBar, AsyncStorage, TouchableOpacit
 import { withNavigation, SafeAreaView } from 'react-navigation';
 import styles from "./style";
 import api from "./utils";
-import { Button } from 'antd-mobile';
+import { Button, Modal } from 'antd-mobile';
 import { Consumer } from "./context/decks";
+
+const alert = Modal.alert
 
 class IndividualDeck extends React.Component {
   
@@ -14,7 +16,6 @@ class IndividualDeck extends React.Component {
     // const { params } = props.navigation.state;
   }
   static navigationOptions = ({ navigation }) => {
-    // console.log(navigation)
     return {
       title: navigation.state.params.deck.title,
     }
@@ -34,6 +35,12 @@ class IndividualDeck extends React.Component {
               })
             }}>Add Card</Button>
             <Button type="primary" style={styles.button} onClick={() => {
+                if (this.props.navigation.state.params.deck.questions.length < 1){
+                  alert('', 'Please add a question first', [
+                    { text: 'OK', onPress: () => console.log('ok') },
+                  ]);
+                  return;
+                }
               this.props.navigation.navigate('Quiz', {
                 id: this.props.navigation.state.params.deck.id
               })

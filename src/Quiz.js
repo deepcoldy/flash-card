@@ -4,6 +4,14 @@ import { Text } from "react-native";
 import { Consumer } from "./context/decks";
 import { Button } from "antd-mobile";
 
+function Page(props) {
+  console.log(props)
+  return (
+    <Text>{`${props.current}/${props.total}`}</Text>
+  )
+}
+
+
 class Quiz extends React.Component{
   constructor({ navigation, store }) {
     super()
@@ -12,6 +20,7 @@ class Quiz extends React.Component{
     })
     this.state = {
       deck,
+      current: 1
     }
     const setParamsAction = NavigationActions.setParams({
       params: {
@@ -21,11 +30,15 @@ class Quiz extends React.Component{
     });
     navigation.dispatch(setParamsAction)
   }
+  
+  showQuestion() {
+
+  }
 
   render() {
     return (
       <SafeAreaView>
-        <Text>123</Text>
+        <Page current={this.state.current} total={this.state.deck.questions.length}/>
       </SafeAreaView>
     )
   }
