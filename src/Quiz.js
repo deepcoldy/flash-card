@@ -21,7 +21,8 @@ class Quiz extends React.Component{
     })
     this.state = {
       deck,
-      current: 1
+      current: 1,
+      showAnswer: false,
     }
     const setParamsAction = NavigationActions.setParams({
       params: {
@@ -37,11 +38,20 @@ class Quiz extends React.Component{
   }
 
   render() {
-    const { deck, current } = this.state
+    const { deck, current, showAnswer } = this.state
     return (
       <SafeAreaView style={styles.wrapper}>
         <Page current={current} total={deck.questions.length}/>
-        <Text style={styles.title}>{deck.questions[current-1].question}</Text>
+        {
+          showAnswer ? 
+          <Text style={styles.title}>{deck.questions[current-1].answer}</Text>
+          : <Text style={styles.title}>{deck.questions[current-1].question}</Text>
+        }
+        <Text onPress={() => {
+          this.setState({
+            showAnswer: !showAnswer
+          })
+        }}>{showAnswer ? 'Answer' : 'Question' }</Text>
         <WhiteSpace size="xl"/>
         <Button type="primary" style={styles.button}>Correct</Button>
         <Button type="warning" style={styles.button}>Incorrect</Button>
