@@ -38,6 +38,7 @@ export default class App extends React.Component {
       },
       getAllDecks: async () => {
         const decks = JSON.parse(await AsyncStorage.getItem('decksData'))
+        console.log(decks)
         if (decks) {
           this.setState({
             decks,

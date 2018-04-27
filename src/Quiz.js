@@ -41,7 +41,7 @@ class Quiz extends React.Component{
     return (
       <SafeAreaView style={styles.wrapper}>
         <Page current={current} total={deck.questions.length}/>
-        <Text style={styles.title}>{deck.questions[current].question}</Text>
+        <Text style={styles.title}>{deck.questions[current-1].question}</Text>
         <WhiteSpace size="xl"/>
         <Button type="primary" style={styles.button}>Correct</Button>
         <Button type="warning" style={styles.button}>Incorrect</Button>
