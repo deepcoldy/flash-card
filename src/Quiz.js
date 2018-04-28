@@ -57,10 +57,10 @@ class Quiz extends React.Component {
         <Page current={current} total={deck.questions.length}/>
         {
           showAnswer ?
-          <Text style={styles.title}>{deck.questions[current-1].answer}</Text>
-          : <Text style={styles.title}>{deck.questions[current-1].question}</Text>
+          <Text style={styles.question}>{deck.questions[current-1].answer}</Text>
+          : <Text style={styles.question}>{deck.questions[current-1].question}</Text>
         }
-        <Text onPress={() => {
+        <Text style={styles.testButton} onPress={() => {
           this.setState({
             showAnswer: !showAnswer,
           });

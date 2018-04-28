@@ -40,7 +40,6 @@ export default class App extends React.Component {
       },
       getDecks: async () => {
         const decks = JSON.parse(await AsyncStorage.getItem('decksData'))
-        console.log(decks)
         if (decks) {
           this.setState({
             decks,
@@ -49,7 +48,7 @@ export default class App extends React.Component {
           this.state.updateDecks([])
         }
       },
-      addDeck: (title) => {
+      saveDeckTitle: (title) => {
         const newDecks = [
           ...this.state.decks,
           {
@@ -62,13 +61,12 @@ export default class App extends React.Component {
       },
       clearAllDecks: () => {
         this.setState({
-          decksData: []
+          decks: []
         })
         AsyncStorage.clear()
       },
       addQuestion: ({ id, question, answer}) => {
         const newDecks = this.state.decks.map(item => {
-          console.log('item', item)
           if (item.id === id) {
             item.questions.push({
               question,
@@ -77,7 +75,6 @@ export default class App extends React.Component {
           }
           return item
         });
-        console.log(newDecks)
         this.state.updateDecks(newDecks)
       },
     }

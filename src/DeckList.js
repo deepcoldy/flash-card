@@ -20,10 +20,6 @@ class DeckList extends React.Component {
   render() {
     return (
       <Consumer>
-        {/* {(store) => {
-          console.log(store)
-          return ''
-        }} */}
         {(store) => <SafeAreaView style={{minHeight: '100%'}}>
           <FlatList
             data={store.decks}
@@ -41,7 +37,7 @@ class DeckList extends React.Component {
               text: 'Add',
               onPress: (value) => {
                 if (value) {
-                  store.addDeck(value);
+                  store.saveDeckTitle(value);
                 }
               },
             },

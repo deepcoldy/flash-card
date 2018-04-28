@@ -5,12 +5,19 @@ import {Button, List, InputItem, Toast} from 'antd-mobile';
 import {SafeAreaView} from 'react-navigation';
 import {Consumer} from './context/decks';
 
+customFocusInst = {
+  focus: () => {
+    console.log(123)
+  }
+}
+
 class AddQuestion extends React.Component {
   constructor(props) {
     super();
     this.state = {
       question: '',
       answer: '',
+      onSubmit: false,
     };
     // const { params } = props.navigation.state;
   }
@@ -20,6 +27,7 @@ class AddQuestion extends React.Component {
     };
   }
   question = (value) => {
+    
     if (value) {
       this.setState({
         question: value,
@@ -33,6 +41,7 @@ class AddQuestion extends React.Component {
       });
     }
   }
+
   render() {
     const deck = this.props.navigation.state.params.deck;
     return (
@@ -47,6 +56,7 @@ class AddQuestion extends React.Component {
                 labelNumber="4.5"
                 onChange={this.question}
                 value={this.state.question}
+                error={!this.state.question && this.state.onSubmit}
               >Question:</InputItem>
               <InputItem
                 placeholder="Please input a answer"
@@ -55,21 +65,32 @@ class AddQuestion extends React.Component {
                 labelNumber="4.5"
                 onChange={this.answer}
                 value={this.state.answer}
+                error={!this.state.answer && this.state.onSubmit}
               >Answer:</InputItem>
             </List>
             <List.Item>
               <Button
                 onClick={() => {
-                  store.addQuestion({
-                    id: deck.id,
-                    question: this.state.question,
-                    answer: this.state.answer,
-                  });
                   this.setState({
-                    question: '',
-                    answer: '',
-                  });
-                  Toast.success('Add Question Success!', 1);
+                    onSubmit: true
+                  })
+                  if (this.state.question && this.state.answer){
+                    store.addQuestion({
+                      id: deck.id,
+                      question: this.state.question,
+                      answer: this.state.answer,
+                    });
+                    this.setState({
+                      question: '',
+                      answer: '',
+                    });
+                    Toast.success('Add Question Success!', 2, false, false);
+                    this.setState({
+                      onSubmit: false
+                    })
+                  } else {
+                    Toast.fail('Please complete the form', 2, false, false);                    
+                  }
                 }}
               >
                 Submit
