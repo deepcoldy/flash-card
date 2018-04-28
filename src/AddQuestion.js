@@ -1,39 +1,36 @@
 import React from 'react';
-import { StyleSheet, Text, StatusBar, AsyncStorage, TextInput, TouchableOpacity } from 'react-native';
 // import { StackNavigator } from 'react-navigation';
-import { withNavigation } from 'react-navigation';
-import styles from "./style";
-import api from "./utils";
-import { Button, List, InputItem, Toast } from 'antd-mobile';
-import { SafeAreaView } from 'react-navigation';
-import { Consumer } from "./context/decks";
+import {withNavigation} from 'react-navigation';
+import {Button, List, InputItem, Toast} from 'antd-mobile';
+import {SafeAreaView} from 'react-navigation';
+import {Consumer} from './context/decks';
 
 class AddQuestion extends React.Component {
   constructor(props) {
-    super()
+    super();
     this.state = {
       question: '',
-      answer: ''
-    }
+      answer: '',
+    };
     // const { params } = props.navigation.state;
   }
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = ({navigation}) => {
     return {
       title: navigation.state.params.deck.title,
-    }
+    };
   }
   question = (value) => {
-    if(value) {
+    if (value) {
       this.setState({
-        question: value
-      })
+        question: value,
+      });
     }
   }
   answer = (value) => {
     if (value) {
       this.setState({
-        answer: value
-      })
+        answer: value,
+      });
     }
   }
   render() {
@@ -41,7 +38,7 @@ class AddQuestion extends React.Component {
     return (
       <Consumer>
         {
-          store =>  <SafeAreaView>
+          (store) => <SafeAreaView>
             <List>
               <InputItem
                 placeholder="Please input a question"
@@ -66,12 +63,12 @@ class AddQuestion extends React.Component {
                   store.addQuestion({
                     id: deck.id,
                     question: this.state.question,
-                    answer: this.state.answer
-                  })
+                    answer: this.state.answer,
+                  });
                   this.setState({
                     question: '',
                     answer: '',
-                  })
+                  });
                   Toast.success('Add Question Success!', 1);
                 }}
               >

@@ -5,10 +5,9 @@ import DeckList from "./src/DeckList";
 import IndividualDeck from "./src/IndividualDeck";
 import AddQuestion from "./src/AddQuestion";
 import Quiz from "./src/Quiz";
-import styles from "./src/style";
-import { Provider, Consumer } from "./src/context/decks";
+import Score from "./src/Score";
+import { Provider } from "./src/context/decks";
 import { StackNavigator } from 'react-navigation';
-import { SafeAreaView } from 'react-navigation';
 
 const Navigator = StackNavigator({
   DeckList: {
@@ -23,6 +22,9 @@ const Navigator = StackNavigator({
   Quiz: {
     screen: Quiz,
   },
+  Score: {
+    screen: Score,
+  },
 });
 
 export default class App extends React.Component {
@@ -36,7 +38,7 @@ export default class App extends React.Component {
         })
         AsyncStorage.setItem('decksData', JSON.stringify(decks))
       },
-      getAllDecks: async () => {
+      getDecks: async () => {
         const decks = JSON.parse(await AsyncStorage.getItem('decksData'))
         console.log(decks)
         if (decks) {
@@ -79,7 +81,7 @@ export default class App extends React.Component {
         this.state.updateDecks(newDecks)
       },
     }
-    this.state.getAllDecks()
+    this.state.getDecks()
   }
   render() {
     return (

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
 export default StyleSheet.create({
   card: {
@@ -14,7 +14,7 @@ export default StyleSheet.create({
   },
   number: {
     fontSize: 14,
-    color: '#bbbbbb'
+    color: '#bbbbbb',
   },
   button: {
     marginBottom: 10,
@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
   deckName: {
     fontSize: 30,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   questionNumber: {
     fontSize: 18,
@@ -40,5 +40,5 @@ export default StyleSheet.create({
     position: 'absolute',
     top: 10,
     left: 10,
-  }
+  },
 });

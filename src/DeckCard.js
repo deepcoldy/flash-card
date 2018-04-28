@@ -1,19 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, View, Alert, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import styles from "./style";
+import {Text, View, TouchableOpacity} from 'react-native';
+import {withNavigation} from 'react-navigation';
+import styles from './style';
 
 class Card extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
   }
-  
   render() {
-    return(
+    return (
       <TouchableOpacity onPress={() => {
         this.props.navigation.navigate('IndividualDeck', {
-          deck: this.props.data
-        })
+          deck: this.props.data,
+        });
       }}>
         <View style={styles.card}>
           <Text style={styles.title}>
@@ -24,7 +23,7 @@ class Card extends React.Component {
           </Text>
         </View>
       </TouchableOpacity>
-    )
+    );
   }
 }
 

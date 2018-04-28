@@ -1,49 +1,47 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, StatusBar, AsyncStorage, TouchableOpacity, BackHandler } from 'react-native';
+import { Text } from 'react-native';
 // import { StackNavigator } from 'react-navigation';
-import { withNavigation, SafeAreaView } from 'react-navigation';
-import styles from "./style";
-import api from "./utils";
-import { Button, Modal } from 'antd-mobile';
-import { Consumer } from "./context/decks";
+import {withNavigation, SafeAreaView} from 'react-navigation';
+import styles from './style';
+import {Button, Modal} from 'antd-mobile';
+import {Consumer} from './context/decks';
 
-const alert = Modal.alert
+const alert = Modal.alert;
 
 class IndividualDeck extends React.Component {
-  
   constructor(props) {
-    super()
-    // const { params } = props.navigation.state;
+    super();
   }
-  static navigationOptions = ({ navigation }) => {
+  
+  static navigationOptions = ({navigation}) => {
     return {
       title: navigation.state.params.deck.title,
-    }
+    };
   }
 
   render() {
     return (
       <Consumer>
         {
-          store => 
+          (store) =>
           <SafeAreaView style={[styles.wrapper]}>
             <Text style={styles.deckName}>{this.props.navigation.state.params.deck.title}</Text>
             <Text style={styles.questionNumber}>{this.props.navigation.state.params.deck.questions.length} cards</Text>
             <Button type="ghost" style={styles.button} onClick={() => {
               this.props.navigation.navigate('AddQuestion', {
-                deck: this.props.navigation.state.params.deck
-              })
+                deck: this.props.navigation.state.params.deck,
+              });
             }}>Add Card</Button>
             <Button type="primary" style={styles.button} onClick={() => {
-                if (this.props.navigation.state.params.deck.questions.length < 1){
+                if (this.props.navigation.state.params.deck.questions.length < 1) {
                   alert('', 'Please add a question first', [
-                    { text: 'OK', onPress: () => console.log('ok') },
+                    {text: 'OK', onPress: () => console.log('ok')},
                   ]);
                   return;
                 }
               this.props.navigation.navigate('Quiz', {
-                id: this.props.navigation.state.params.deck.id
-              })
+                id: this.props.navigation.state.params.deck.id,
+              });
             }}>Start Quiz</Button>
 
           </SafeAreaView>

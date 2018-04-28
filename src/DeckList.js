@@ -1,24 +1,21 @@
 import React from 'react';
-import { FlatList, AsyncStorage } from 'react-native';
-import { withNavigation } from 'react-navigation';
-import { SafeAreaView } from 'react-navigation';
-import { Modal, Button, WingBlank, WhiteSpace } from 'antd-mobile';
-import styles from "./style";
-import Card from "./DeckCard";
-import api from "./utils";
-import { Consumer } from "./context/decks";
+import {FlatList} from 'react-native';
+import {withNavigation} from 'react-navigation';
+import {SafeAreaView} from 'react-navigation';
+import {Modal, Button, WhiteSpace} from 'antd-mobile';
+import Card from './DeckCard';
+import {Consumer} from './context/decks';
 
 const prompt = Modal.prompt;
 const alert = Modal.alert;
-// AsyncStorage.clear()
 
-_keyExtractor = (item, index) => item.id.toString();
+const _keyExtractor = (item, index) => item.id.toString();
 class DeckList extends React.Component {
   constructor() {
     super();
   }
-  static navigationOptions = ({ navigation }) => ({
-    title: `Decks`,
+  static navigationOptions = () => ({
+    title: 'Decks',
   });
   render() {
     return (
@@ -27,36 +24,36 @@ class DeckList extends React.Component {
           console.log(store)
           return ''
         }} */}
-        {store => <SafeAreaView style={{ minHeight: '100%' }}>
+        {(store) => <SafeAreaView style={{minHeight: '100%'}}>
           <FlatList
             data={store.decks}
             keyExtractor={_keyExtractor}
             renderItem={(item) => {
               return (
                 <Card data={item.item} />
-              )
+              );
             }}
           ></FlatList>
           <WhiteSpace size="lg" />
           <Button onClick={() => prompt('Please Input a Deck Name', false, [
-            { text: 'Cancel' },
+            {text: 'Cancel'},
             {
               text: 'Add',
-              onPress: value => {
+              onPress: (value) => {
                 if (value) {
-                  store.addDeck(value)
+                  store.addDeck(value);
                 }
-              }
+              },
             },
           ])}
           >Add Deck</Button>
           <Button onClick={
             () => alert('Delete all Deck', 'Are you sure???', [
-              { text: 'Cancel', onPress: () => console.log('cancel') },
+              {text: 'Cancel', onPress: () => console.log('cancel')},
               {
                 text: 'Ok', onPress: () => {
-                  store.clearAllDecks()
-                }
+                  store.clearAllDecks();
+                },
               },
             ])
           }>Delete all Deck</Button>
