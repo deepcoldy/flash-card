@@ -20,6 +20,11 @@ export default StyleSheet.create({
     marginBottom: 10,
     width: 200,
   },
+  fixButtonGroup: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100%',
+  },
   wrapper: {
     position: 'relative',
     display: 'flex',

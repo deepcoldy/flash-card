@@ -5,12 +5,6 @@ import {Button, List, InputItem, Toast} from 'antd-mobile';
 import {SafeAreaView} from 'react-navigation';
 import {Consumer} from './context/decks';
 
-customFocusInst = {
-  focus: () => {
-    console.log(123)
-  }
-}
-
 class AddQuestion extends React.Component {
   constructor(props) {
     super();
@@ -19,7 +13,6 @@ class AddQuestion extends React.Component {
       answer: '',
       onSubmit: false,
     };
-    // const { params } = props.navigation.state;
   }
   static navigationOptions = ({navigation}) => {
     return {
@@ -27,19 +20,16 @@ class AddQuestion extends React.Component {
     };
   }
   question = (value) => {
-    
-    if (value) {
-      this.setState({
-        question: value,
-      });
-    }
+    this.setState({
+      question: value,
+      onSubmit: false,
+    });
   }
   answer = (value) => {
-    if (value) {
-      this.setState({
-        answer: value,
-      });
-    }
+    this.setState({
+      answer: value,
+      onSubmit: false,
+    });
   }
 
   render() {

@@ -8,6 +8,7 @@ import Quiz from "./src/Quiz";
 import Score from "./src/Score";
 import { Provider } from "./src/context/decks";
 import { StackNavigator } from 'react-navigation';
+import { setNotifications } from "./src/notification";
 
 const Navigator = StackNavigator({
   DeckList: {
@@ -37,16 +38,14 @@ export default class App extends React.Component {
           decks,
         })
         AsyncStorage.setItem('decksData', JSON.stringify(decks))
+        if(decks.length){
+          console.log('set')
+          setNotifications()
+        }
       },
       getDecks: async () => {
-        const decks = JSON.parse(await AsyncStorage.getItem('decksData'))
-        if (decks) {
-          this.setState({
-            decks,
-          })
-        } else {
-          this.state.updateDecks([])
-        }
+        const decks = await AsyncStorage.getItem('decksData') ? JSON.parse(await AsyncStorage.getItem('decksData')) : []
+        this.state.updateDecks(decks)
       },
       saveDeckTitle: (title) => {
         const newDecks = [
@@ -57,6 +56,29 @@ export default class App extends React.Component {
             questions: []
           }
         ]
+        // const decks = this.state.decks
+        // decks.push({
+        //   id: this.state.decks.length + 1,
+        //   title,
+        //   questions: []
+        // })
+        // this.setState({
+        //   decks
+        // })
+
+        // this.setState((prevState) => ({
+        //   decks: [
+        //     ...prevState.decks,
+        //     {
+        //       id: prevState.decks.length + 1,
+        //       title,
+        //       questions: []
+        //     }
+        //   ]
+        // }), () => {
+
+        //   console.log('123')
+        // })
         this.state.updateDecks(newDecks)
       },
       clearAllDecks: () => {
