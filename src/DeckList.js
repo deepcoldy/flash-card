@@ -1,11 +1,11 @@
 import React from 'react';
-import {FlatList, View} from 'react-native';
-import {withNavigation} from 'react-navigation';
-import {SafeAreaView} from 'react-navigation';
-import {Modal, Button, WhiteSpace} from 'antd-mobile';
+import { FlatList, View } from 'react-native';
+import { withNavigation } from 'react-navigation';
+import { SafeAreaView } from 'react-navigation';
+import { Modal, Button, WhiteSpace } from 'antd-mobile';
 import Card from './DeckCard';
 // import {Consumer} from './context/decks';
-import withConsumer from "./consumer";
+import withConsumer from "./withConsumer";
 import styles from "./style";
 
 const prompt = Modal.prompt;
@@ -24,7 +24,7 @@ class DeckList extends React.Component {
       return item.id+''
     }
     return (
-      <View style={{ minHeight: '100%' }}>
+      <SafeAreaView style={{ minHeight: '100%' }}>
         <FlatList
           data={this.props.store.decks}
           extraData={this.props.store}
@@ -74,7 +74,7 @@ class DeckList extends React.Component {
             ])
           }>Delete all Deck</Button>
         </View>
-      </View>
+      </SafeAreaView>
     );
   }
 }

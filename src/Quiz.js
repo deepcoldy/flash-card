@@ -3,7 +3,8 @@ import { withNavigation, SafeAreaView, NavigationActions } from 'react-navigatio
 import { Text } from 'react-native';
 import { Button, WhiteSpace } from 'antd-mobile';
 import styles from './style';
-import withConsumer from "./consumer";
+import withConsumer from "./withConsumer";
+import { clearNotifications } from "./notification";
 
 function Page(props) {
   return (
@@ -44,6 +45,7 @@ class Quiz extends React.Component {
         current: this.state.current + 1,
       });
     } else if (this.state.current === this.state.deck.questions.length) {
+      clearNotifications()
       this.props.navigation.replace('Score', {
         score: (((this.state.correct) / this.state.deck.questions.length) * 100).toFixed(2),
       });

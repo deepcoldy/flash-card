@@ -1,6 +1,6 @@
 import React from 'react';
-import {Text, View, TouchableOpacity} from 'react-native';
-import {withNavigation} from 'react-navigation';
+import { Text, View, TouchableOpacity } from 'react-native';
+import { withNavigation } from 'react-navigation';
 import styles from './style';
 
 class Card extends React.Component {
