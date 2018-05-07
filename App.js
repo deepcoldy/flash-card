@@ -39,7 +39,6 @@ export default class App extends React.Component {
         })
         AsyncStorage.setItem('decksData', JSON.stringify(decks))
         if(decks.length){
-          console.log('set')
           setNotifications()
         }
       },
@@ -56,36 +55,13 @@ export default class App extends React.Component {
             questions: []
           }
         ]
-        // const decks = this.state.decks
-        // decks.push({
-        //   id: this.state.decks.length + 1,
-        //   title,
-        //   questions: []
-        // })
-        // this.setState({
-        //   decks
-        // })
-
-        // this.setState((prevState) => ({
-        //   decks: [
-        //     ...prevState.decks,
-        //     {
-        //       id: prevState.decks.length + 1,
-        //       title,
-        //       questions: []
-        //     }
-        //   ]
-        // }), () => {
-
-        //   console.log('123')
-        // })
         this.state.updateDecks(newDecks)
       },
       clearAllDecks: () => {
         this.setState({
           decks: []
         })
-        AsyncStorage.clear()
+        AsyncStorage.removeItem('decksData')
       },
       addQuestion: ({ id, question, answer}) => {
         const newDecks = this.state.decks.map(item => {

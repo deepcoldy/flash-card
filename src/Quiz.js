@@ -1,9 +1,9 @@
 import React from 'react';
 import { withNavigation, SafeAreaView, NavigationActions } from 'react-navigation';
 import { Text } from 'react-native';
-import { Consumer } from './context/decks';
 import { Button, WhiteSpace } from 'antd-mobile';
 import styles from './style';
+import withConsumer from "./consumer";
 
 function Page(props) {
   return (
@@ -77,27 +77,7 @@ class Quiz extends React.Component {
   }
 }
 
-function withDeck(WrappedComponent) {
-  return class withDeck extends React.Component {
-    constructor(props) {
-      super(props);
-    }
-
-    static navigationOptions = ({navigation: {state}}, props) => {
-      return {
-        title: state.params.title || '',
-      };
-    }
-
-    render() {
-      // ... and renders the wrapped component with the fresh data!
-      // Notice that we pass through any additional props
-      return <Consumer>
-        {(store) => <WrappedComponent {...this.props} store={store} />}
-      </Consumer>;
-    }
-  };
-}
 
 
-export default withDeck(withNavigation(Quiz));
+
+export default withConsumer(withNavigation(Quiz));

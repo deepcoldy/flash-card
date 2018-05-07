@@ -5,6 +5,7 @@ import {withNavigation, SafeAreaView} from 'react-navigation';
 import styles from './style';
 import {Button, Modal} from 'antd-mobile';
 import {Consumer} from './context/decks';
+import { clearNotifications } from "./notification";
 
 const alert = Modal.alert;
 
@@ -33,12 +34,13 @@ class IndividualDeck extends React.Component {
               });
             }}>Add Card</Button>
             <Button type="primary" style={styles.button} onClick={() => {
-                if (this.props.navigation.state.params.deck.questions.length < 1) {
-                  alert('', 'Please add a question first', [
-                    {text: 'OK', onPress: () => console.log('ok')},
-                  ]);
-                  return;
-                }
+              if (this.props.navigation.state.params.deck.questions.length < 1) {
+                alert('', 'Please add a question first', [
+                  {text: 'OK', onPress: () => console.log('ok')},
+                ]);
+                return;
+              }
+              clearNotifications()
               this.props.navigation.navigate('Quiz', {
                 id: this.props.navigation.state.params.deck.id,
               });
